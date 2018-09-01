@@ -17,6 +17,5 @@ public class Main {
     System.out.println(player.remainingHealth());
     player.loseHealth(1);
     System.out.println(player.remainingHealth());
-
   }
 }
