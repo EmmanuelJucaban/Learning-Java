@@ -27,6 +27,4 @@ public class Printer {
       System.out.println("Total toner level " + this.tonerLevel);
     }
   }
-
-
 }
