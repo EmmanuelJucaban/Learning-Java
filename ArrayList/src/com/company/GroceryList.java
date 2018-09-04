@@ -5,7 +5,11 @@ import java.util.ArrayList;
 public class GroceryList {
   private ArrayList<String> groceryList = new ArrayList<String>();
 
-//  add
+  public ArrayList<String> getGroceryList() {
+    return groceryList;
+  }
+
+  //  add
   public void addItem(String item){
     groceryList.add(item);
   }
@@ -18,24 +22,42 @@ public class GroceryList {
   }
 //  modify
 
-  public void modifyItem(int position, String newItem){
+  public void modifyItem(String currentItem, String newItem){
+    int position = findItem(currentItem);
+    if(position >= 0) {
+      modifyItem(position, newItem);
+    }
+  }
+
+
+  private void modifyItem(int position, String newItem){
     groceryList.set(position, newItem);
     System.out.println("Grocery item " + (position+1) + " has been modified");
   }
 
   // remove
-  public void removeItem(int position){
-    String theItem = groceryList.get(position);
-    groceryList.remove(position-1);
+
+  public void removeItem(String newItem){
+    int position = findItem(newItem);
+    if(position >= 0) {
+      removeItem(position);
+    }
+  }
+
+  private void removeItem(int position){
+    groceryList.remove(position);
   }
 //  find
 
 
-  public String findItem(String item){
-    int position = groceryList.indexOf(item);
-    if(position >= 0){
-      return groceryList.get(position);
-    }
-    return null;
+  private int findItem(String searchItem){
+    return groceryList.indexOf(searchItem);
   }
+
+  public boolean onFile(String searchItem){
+    int position = findItem(searchItem);
+    return position >= 0;
+  }
+
+
 }

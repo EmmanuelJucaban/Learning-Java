@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -37,6 +38,9 @@ public class Main {
           searchForItem();
           break;
         case 6:
+          processArrayList();
+          break;
+        case 7:
           quit = true;
           break;
       }
@@ -60,28 +64,41 @@ public class Main {
   }
 
   public static void modifyItem(){
-    System.out.println("Enter item number: ");
-    int itemNo = scanner.nextInt();
+    System.out.println("Enter item name: ");
+    String itemName = scanner.nextLine();
     System.out.println("Enter replacement item: ");
-    String item = scanner.nextLine();
-    groceryList.modifyItem(itemNo, item);
+    String newItem = scanner.nextLine();
+    groceryList.modifyItem(itemName, newItem);
   }
 
   public static void removeItem(){
-    System.out.println("Enter item number to remove: ");
-    int position = scanner.nextInt();
-    groceryList.removeItem(position);
+    System.out.println("Enter item name to remove: ");
+    String itemName = scanner.nextLine();
+    groceryList.removeItem(itemName);
   }
 
   public static void searchForItem(){
     System.out.println("Please enter item name: ");
-    String itemName = scanner.nextLine();
-    if(groceryList.findItem(itemName) != null) {
-      System.out.println("Found item " + itemName + " in your grocery list.");
+    String searchItem = scanner.nextLine();
+    if(groceryList.onFile(searchItem)) {
+      System.out.println("Found your item " + searchItem);
     } else {
-      System.out.println("Item is not in your grocery list.");
+      System.out.println("Item not found.");
     }
-
   }
 
+  public static void processArrayList(){
+    ArrayList<String> newArray = new ArrayList<String>();
+    newArray.addAll(groceryList.getGroceryList());
+
+
+//   this is identical to the code above. both create a mew coppy of the array
+    ArrayList<String> nextArray = new ArrayList<String>(groceryList.getGroceryList());
+
+
+    // How to convert an array list to an array
+    String[] anArray = new String[groceryList.getGroceryList().size()];
+    anArray = groceryList.getGroceryList().toArray(anArray);
+
+  }
 }
