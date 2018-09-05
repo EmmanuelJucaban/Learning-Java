@@ -17,6 +17,12 @@ public class Main {
 
     healthyBurgerPrice = healthyBurger.itemizeHamburger();
     System.out.println(healthyBurgerPrice);
+
+
+    DeluxeBurger deluxeBurger = new DeluxeBurger("Steak", "sourdough", "lays",.40,"coke", .40);
+
+    deluxeBurger.addHamburgerAddition1("tomato", .50);
+    System.out.println(deluxeBurger.itemizeHamburger());
   }
 }
 

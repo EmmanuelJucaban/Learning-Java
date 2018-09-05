@@ -1,23 +1,11 @@
 package com.company;
 
 public class DeluxeBurger extends Hamburger {
-  private String name;
-  private double price;
-  private String breadRollType;
-  private String meat;
-
-  private String chipsAddition;
-  private double chipsPrice;
-
-  private String drinkAddition;
-  private double drinkPrice;
 
   public DeluxeBurger(String meat, String breadRollType, String chipsAddition, double chipsPrice, String drinkAddition, double drinkPrice){
     super("Deluxe burger", meat, breadRollType);
-    this.chipsAddition = chipsAddition;
-    this.chipsPrice = chipsPrice;
-    this.drinkAddition = drinkAddition;
-    this.drinkPrice = drinkPrice;
+    super.addHamburgerAddition1("Drinks", .50);
+    super.addHamburgerAddition2("chips", .50);
   }
 
   @Override
@@ -42,14 +30,6 @@ public class DeluxeBurger extends Hamburger {
 
   @Override
   public Double itemizeHamburger() {
-    double deluxeBurgerPrice = super.itemizeHamburger();
-    if(this.chipsAddition != null) {
-      deluxeBurgerPrice += chipsPrice;
-    }
-
-    if(this.drinkAddition != null) {
-      deluxeBurgerPrice += drinkPrice;
-    }
-    return deluxeBurgerPrice;
+    return super.itemizeHamburger();
   }
 }
