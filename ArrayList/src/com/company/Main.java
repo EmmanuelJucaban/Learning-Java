@@ -99,6 +99,5 @@ public class Main {
     // How to convert an array list to an array
     String[] anArray = new String[groceryList.getGroceryList().size()];
     anArray = groceryList.getGroceryList().toArray(anArray);
-
   }
 }

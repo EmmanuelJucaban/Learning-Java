@@ -73,3 +73,19 @@ public class Hamburger {
     return hamburgerPrice;
   }
 }
+
+
+// front end
+socket.emit('triggerDocChange', {editorState, docId});
+
+
+socket.on('docChanged', {editorState} => {
+
+})
+// backend
+
+socket.on('triggerDocChange', ({editorState, docId} => {
+      Document.findOneAndUpdate({_id: docId}, {content: editorState}).then(document => {
+        socket.to(doc.id).emit("docChanged", {editorState: document.content});
+        });
+}));
