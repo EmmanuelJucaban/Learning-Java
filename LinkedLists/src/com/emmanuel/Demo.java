@@ -2,6 +2,7 @@ package com.emmanuel;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class Demo {
   public static void main(String[] args) {
@@ -44,5 +45,61 @@ public class Demo {
       System.out.println("Now visiting " + i.next());
     }
     System.out.println("============");
+  }
+
+  private static boolean addInOrder(LinkedList<String> linkedList, String newCity) {
+    // A listIterator gives us more flexibility than a regular iterator
+    // It's really made for situations like this where
+    // we're inserting certain records or so forth
+
+    // Put a listIterator on the linkedList that we're passing in
+    ListIterator<String> stringListIterator = linkedList.listIterator();
+
+    // Loop through everything in the linkedList
+    while(stringListIterator.hasNext()){
+
+      // We are going to use a compareTo function here
+      // Compare the current city we're on to the passed in argument
+      // The compareTo method is a String method
+      int comparison = stringListIterator.next().compareTo(newCity);
+      System.out.println("comparison " + comparison);
+      // The compareTo gives us a number of type int
+      // If it returns 0, it means that both the value and the comparator are the same
+      if(comparison == 0) {
+        // equal do not add
+        System.out.println(newCity + " is already included as a destination");
+        // We return false meaning that it wasn't successfully added
+        return false;
+      } else if (comparison > 0) {
+        // Else if the comparison is greater than 0
+        // What that means is that the item should come before the value being compared
+        // New should appear before this one
+        // Brisbane -> Adelaide
+
+        // Since we already called next, it moved to the next entry automatically
+        // So we need to go back to the previous entry again which is the one we're at
+
+        // Previous goes back to the earlier entry
+
+        stringListIterator.previous();
+        // Adds new city to the right position
+
+        // This is the reason we use a ListIterator
+        // We can't go back using a regular iterator
+        // We are forced to go through the whole thing with a regular iterator
+        // And there's no way of going back
+        stringListIterator.add(newCity);
+        // Since we successfully added a record, we can return true
+        return true;
+      } else if (comparison < 0) {
+        // If the comparison is less than 0, that means we don't need to do anything
+        //
+      }
+    }
+    // In case we go through the whole list without finding a suitable point to add the entry,
+    // We just add it to the end.
+
+    stringListIterator.add(newCity);
+
   }
 }
