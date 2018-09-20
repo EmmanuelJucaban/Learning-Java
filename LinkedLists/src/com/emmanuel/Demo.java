@@ -7,15 +7,20 @@ import java.util.ListIterator;
 public class Demo {
   public static void main(String[] args) {
     LinkedList<String> placesToVisit = new LinkedList<String>();
-
-    placesToVisit.add("Sydney");
-    placesToVisit.add("Melbourne");
-    placesToVisit.add("Brisbane");
-    placesToVisit.add("Perth");
-    placesToVisit.add("Canberra");
-    placesToVisit.add("Adelaide");
-    placesToVisit.add("Darwin");
-
+    addInOrder(placesToVisit, "Sydney");
+    addInOrder(placesToVisit, "Melbourne");
+    addInOrder(placesToVisit, "Brisbane");
+    addInOrder(placesToVisit, "Perth");
+    addInOrder(placesToVisit, "Canberra");
+    addInOrder(placesToVisit, "Adelaide");
+    addInOrder(placesToVisit, "Darwin");
+//    placesToVisit.add("Sydney");
+//    placesToVisit.add("Melbourne");
+//    placesToVisit.add("Brisbane");
+//    placesToVisit.add("Perth");
+//    placesToVisit.add("Canberra");
+//    placesToVisit.add("Adelaide");
+//    placesToVisit.add("Darwin");
 
     // Insertion on a LinkedList is faster
     // Under the hood, it changes the
@@ -26,6 +31,8 @@ public class Demo {
     placesToVisit.remove(7);
     printList(placesToVisit);
   }
+
+
 
   public static void printList(LinkedList<String> linkedList){
     // A concept of an iterator
@@ -48,11 +55,29 @@ public class Demo {
   }
 
   private static boolean addInOrder(LinkedList<String> linkedList, String newCity) {
+
+
+    // !!!!!!!!
+    // Usually writing methods like these that cause side effects
+    // such as using next should generally be avoided
+    // So unless you really know what you're doing
+    // It's not a good idea to write a method that both returns a value
+    // and changes the object that it's called from
+    // So we're returning that it's true or false
+    // BUT we're modifying the LinkedList that was parsed by it
+    // We are actually changing the actual entries AKA parameters/arguments
+
+
+
+
     // A listIterator gives us more flexibility than a regular iterator
     // It's really made for situations like this where
     // we're inserting certain records or so forth
 
     // Put a listIterator on the linkedList that we're passing in
+
+    // This is not actually pointing to the first record
+    // We actually have to call next method to access the first record
     ListIterator<String> stringListIterator = linkedList.listIterator();
 
     // Loop through everything in the linkedList
@@ -67,6 +92,7 @@ public class Demo {
       // If it returns 0, it means that both the value and the comparator are the same
       if(comparison == 0) {
         // equal do not add
+        // It means the entry already exists in the linkedlist
         System.out.println(newCity + " is already included as a destination");
         // We return false meaning that it wasn't successfully added
         return false;
@@ -101,5 +127,7 @@ public class Demo {
 
     stringListIterator.add(newCity);
 
+    // return true. We successfuly added a new city
+    return true;
   }
 }
