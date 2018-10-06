@@ -15,8 +15,34 @@ public class Main {
     System.out.println(tim);
     tim.setWeapon("Stormbringer");
     saveObject(tim);
-    loadObject(tim);
+//    loadObject(tim);
     System.out.println(tim);
+
+
+    // It can be confusing as to when to declare an instance as the class
+    // Generally speaking, it depends on what we're going to do with that instance
+    // If we wanted to declare a variable that can hold objects of different types,
+    // Then it would have the type of the common interface
+
+    // But if we wanted to access methods that exist in the class
+    // Then the object will have to be declared as the class type itself
+
+    // Generally speaking, when there's no strong reason for using the class type,
+    // in this case there's really no strong need to use the monster class type,
+    // because we have these generic methods for reading and writing,
+    .// and we can access those in a similar way
+    // wit that being the case, we probably want to declare it using the interface
+    // because it keeps the code more generic and
+    // we're making the best use of interfaces
+    iSaveable monster = new Monster("Monster1", 100, 10);
+    System.out.println(monster.toString());
+    // Because we used iSaveable as the base class of monster,
+    // we cannot use getStrength on it
+    // It works like this because we're casting it to a Monster class
+    System.out.println("Strength = " + ((Monster) monster).getStrength());
+    saveObject(monster);
+    System.out.println(monster);
+
   }
 
   public static ArrayList<String> readValues() {
